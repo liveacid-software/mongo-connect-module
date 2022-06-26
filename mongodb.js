@@ -3,10 +3,7 @@
  */
  const mongoose = require('mongoose');
  const url = require('url');
- const debug = require('debug');
  const config = require('./config');
- 
- const log = debug('LiveACID:mongo-module ');
  
  let connection;
 
@@ -15,7 +12,6 @@
          return connection;
      }
      try {
-         log('Connecting to MongoDB...');
  
          const {
              username,
@@ -56,13 +52,15 @@
              mongoOptions.sslCA = Buffer.from(ca, 'base64').toString('ascii');
          }
          
-         console.log("MONGO URL: ", mongoUrl);
+         console.log("Mongo Connect URL: ", mongoUrl);
+         
+         console.log('Mongo Connect: Connecting to MongoDB...');
          await mongoose.connect(mongoUrl, mongoOptions);
+         console.log('Mongo Connect: DB Successfully Connected...');
  
          connection = mongoose.connection;
          connection.on('error', console.error.bind(console, 'connection error:'));
          
-         log('DB Successfully Connected...');
          return connection.getClient();
 
      } catch (err) {

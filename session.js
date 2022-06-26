@@ -12,7 +12,7 @@ module.exports = {
             saveUninitialized: config.session.saveUninitialized,
             store: MongoStore.create({
                 collection: config.session.collection,
-                clientPromise: mongodb.client,
+                clientPromise: mongodb.client(),
             }),
             cookie: {
                 maxAge: config.session.maxAge,
