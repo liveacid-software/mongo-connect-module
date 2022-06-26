@@ -1,6 +1,6 @@
 # mongo-connect-module
 
-### Config
+### Use and Configuration:
 #### This module requires the followin ENV Vars in your project .env 
 
 ```
