@@ -1,7 +1,7 @@
 {
   "name": "mongo-module",
   "description": "LiveACID MongoDB Connection Module",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "private": true,
   "scripts": {
     "test": "node index.js"
