@@ -1,6 +1,7 @@
 const MongoStore = require('connect-mongo');
 const session = require('express-session');
 const mongodb = require('./mongodb');
+const config = require('./config');
 
 session({
     secret: config.session.secret,
