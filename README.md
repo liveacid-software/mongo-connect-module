@@ -23,3 +23,25 @@ SESSION_SAVE_UNINITIALIZED=<Boolean>
 ```
 
 Note: This package uses `express-session` and `mongoose` npm packages
+
+### Example of useage
+#### session usage with express:
+
+```
+const express = require('express');
+const mongoConnect = require('mongo-module');
+
+const app = express();
+
+app.use(mongoConnect.session);
+
+```
+
+#### Mongoose client usage:
+
+```
+const mongoConnect = require('mongo-module');
+
+const client = mongoConnect.client
+
+```
