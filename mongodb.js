@@ -58,12 +58,11 @@
          
          console.log("MONGO URL: ", mongoUrl);
          await mongoose.connect(mongoUrl, mongoOptions);
-         console.log('DB Successfully Connected...');
  
          connection = mongoose.connection;
          connection.on('error', console.error.bind(console, 'connection error:'));
          
-         log('DB Successfully Connected...');
+         log('Mongo Connect: DB Successfully Connected...');
          return connection.getClient();
 
      } catch (err) {
