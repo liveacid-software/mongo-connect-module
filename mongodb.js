@@ -6,7 +6,7 @@
  const debug = require('debug');
  const config = require('./config');
  
- const log = debug('payconnect:server:helpers:mongodb');
+ const log = debug('LiveACID:mongo-module ');
  
  let connection;
 
@@ -62,7 +62,7 @@
          connection = mongoose.connection;
          connection.on('error', console.error.bind(console, 'connection error:'));
          
-         log('Mongo Connect: DB Successfully Connected...');
+         log('DB Successfully Connected...');
          return connection.getClient();
 
      } catch (err) {
