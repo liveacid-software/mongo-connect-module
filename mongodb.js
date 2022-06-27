@@ -64,7 +64,7 @@
          return connection.getClient();
 
      } catch (err) {
-         log(`Error connecting to MongoDB:\n${err}`);
+         console.log(`Error connecting to MongoDB:\n${err}`);
          throw err;
      }
  };
