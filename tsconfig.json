@@ -8,7 +8,7 @@
     "strict": true,
     "outDir": "dist",
     "sourceMap": true,
-    "allowJs": false,
+    "allowJs": true,
     "noImplicitThis": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
@@ -21,7 +21,8 @@
     "strictFunctionTypes": true,
     "strictBindCallApply": true,
     "strictPropertyInitialization": true,
-    "alwaysStrict": true
+    "alwaysStrict": true,
+    "declaration": true
   },
   "include": [
     "src"
