@@ -54,9 +54,8 @@ const client = async () => {
             search
         });
         const mongoOptions = {
-            useUnifiedTopology: true,
             ssl,
-            sslValidate: ssl,
+            sslValidate: ssl
         };
         if (ssl) {
             mongoOptions.sslCA = Buffer.from(ca, 'base64').toString('ascii');

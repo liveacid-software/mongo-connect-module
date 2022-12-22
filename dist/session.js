@@ -26,27 +26,27 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.session = void 0;
 const connect_mongo_1 = __importDefault(require("connect-mongo"));
 const express_session_1 = __importDefault(require("express-session"));
 const mongodb = __importStar(require("./mongodb"));
 const config_1 = __importDefault(require("./config"));
-module.exports = {
-    session() {
-        return (0, express_session_1.default)({
-            secret: config_1.default.session.secret,
-            resave: config_1.default.session.resave,
-            saveUninitialized: config_1.default.session.saveUninitialized,
-            store: connect_mongo_1.default.create({
-                collectionName: config_1.default.session.collection,
-                clientPromise: mongodb.client()
-            }),
-            cookie: {
-                maxAge: config_1.default.session.maxAge,
-                sameSite: 'lax',
-                httpOnly: true,
-                secure: config_1.default.NODE_ENV === 'development',
-            },
-        });
-    },
+const session = () => {
+    return (0, express_session_1.default)({
+        secret: config_1.default.session.secret,
+        resave: config_1.default.session.resave,
+        saveUninitialized: config_1.default.session.saveUninitialized,
+        store: connect_mongo_1.default.create({
+            collectionName: config_1.default.session.collection,
+            clientPromise: mongodb.client()
+        }),
+        cookie: {
+            maxAge: config_1.default.session.maxAge,
+            sameSite: 'lax',
+            httpOnly: true,
+            secure: config_1.default.NODE_ENV === 'development',
+        },
+    });
 };
+exports.session = session;
 //# sourceMappingURL=session.js.map

@@ -41,9 +41,8 @@ export const client = async () => {
         })
 
         const mongoOptions = {
-            useUnifiedTopology: true,
             ssl,
-            sslValidate: ssl,
+            sslValidate: ssl
         } as mongoose.ConnectOptions
 
         if (ssl) {

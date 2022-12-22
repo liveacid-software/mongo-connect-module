@@ -1,2 +1,2 @@
-declare const mongodb: any;
-declare const session: any;
+export * as mongodb from './mongodb';
+export * as session from './session';
