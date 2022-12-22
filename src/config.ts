@@ -20,7 +20,7 @@ const config = {
 		params: process.env.MONGODB_PARAMS,
 		port: process.env.MONGODB_PORT,
 		database: process.env.MONGODB_DATABASE,
-		ssl: process.env.MONGODB_SSL,
+		ssl: process.env.MONGODB_SSL ? true : false,
 		ca: process.env.MONGODB_CA_CERT,
 	},
 	session: {
