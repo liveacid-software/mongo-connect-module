@@ -3,13 +3,13 @@
  *
  * Wrapper object around env vars loaded by dotenv.
  */
-const dotenv = require('dotenv');
-
-const { error } = dotenv.config();
+import * as dotenv from 'dotenv'
+const { error } = dotenv.config()
 
 if (error) {
 	throw error;
 }
+
 
 const config = {
 	mongodb: {
@@ -24,13 +24,13 @@ const config = {
 		ca: process.env.MONGODB_CA_CERT,
 	},
 	session: {
-		secret: process.env.SESSION_SECRET,
-		maxAge: parseInt(process.env.SESSION_MAX_AGE, 10),
+		secret: process.env.SESSION_SECRET!,
+		maxAge: parseInt(process.env.SESSION_MAX_AGE!, 10),
 		collection: process.env.SESSION_COLLECTION || 'sessions',
 		resave: !!process.env.SESSION_RESAVE || false,
 		saveUninitialized: !!process.env.SESSION_SAVE_UNINITIALIZED || false,
-	}
+	},
+	NODE_ENV: process.env.NODE_ENV,
 };
 
-// export default config;
-module.exports = config;
+export default config
