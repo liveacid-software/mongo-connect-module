@@ -7,7 +7,7 @@ declare const config: {
         params: string | undefined;
         port: string | undefined;
         database: string | undefined;
-        ssl: string | undefined;
+        ssl: boolean;
         ca: string | undefined;
     };
     session: {

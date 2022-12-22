@@ -36,6 +36,7 @@ const config_1 = __importDefault(require("./config"));
 let connection;
 const client = async () => {
     if (connection) {
+        console.log('connection reused: ');
         return connection.getClient();
     }
     try {
@@ -52,26 +53,19 @@ const client = async () => {
             pathname,
             search
         });
-        // tells mongo not to use deprecated settings
         const mongoOptions = {
             useUnifiedTopology: true,
-            useFindAndModify: false,
-            useCreateIndex: true,
-            ssl: false,
-            sslValidate: false,
-            sslCA: ''
+            ssl,
+            sslValidate: ssl,
         };
         if (ssl) {
-            mongoOptions.ssl = true;
-            mongoOptions.sslValidate = true;
             mongoOptions.sslCA = Buffer.from(ca, 'base64').toString('ascii');
         }
-        console.log("Mongo Connect URL: ", mongoUrl);
+        mongoose.set('strictQuery', true);
+        console.log('Mongo Connect URL: ', mongoUrl);
         console.log('Mongo Connect: Connecting to MongoDB...');
-        await mongoose.connect(mongoUrl, mongoOptions);
+        connection = await mongoose.createConnection(mongoUrl, mongoOptions).asPromise();
         console.log('Mongo Connect: DB Successfully Connected...');
-        connection = mongoose.connection;
-        connection.on('error', console.error.bind(console, 'connection error:'));
         return connection.getClient();
     }
     catch (err) {
