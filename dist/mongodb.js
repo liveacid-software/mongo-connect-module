@@ -64,8 +64,10 @@ const client = async () => {
         mongoose.set('strictQuery', true);
         console.log('Mongo Connect URL: ', mongoUrl);
         console.log('Mongo Connect: Connecting to MongoDB...');
-        connection = await mongoose.createConnection(mongoUrl, mongoOptions).asPromise();
+        await mongoose.connect(mongoUrl, mongoOptions);
         console.log('Mongo Connect: DB Successfully Connected...');
+        connection = mongoose.connections[0];
+        connection.on('error', console.error.bind(console, 'connection error:'));
         return connection.getClient();
     }
     catch (err) {
