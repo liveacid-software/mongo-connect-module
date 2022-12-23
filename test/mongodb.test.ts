@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import { mongodb as mongoDb, session } from '../src'
+import { client, session } from '../src'
 import mongodb from 'mongodb'
 const mongoose = require('mongoose');
 const { ObjectId } = mongoose.Schema.Types;
@@ -43,7 +43,7 @@ const UserSchema = mongoose.Schema(
 
 describe('mongoDb', () => {
     it('connections to db succesfully', () => {
-        return mongoDb.client()
+        return client()
             .then((results: mongodb.MongoClient) => {
                 expect(results).to.be.a('object')
                 const User = mongoose.model('User', UserSchema);
