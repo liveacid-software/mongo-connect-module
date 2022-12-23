@@ -5,62 +5,67 @@ import * as mongoose from 'mongoose'
 import * as url from 'url'
 import config from './config'
 import * as mongodb from 'mongodb'
-let connection: mongoose.Connection
+let connection: any
 
-export const client = async () => {
+export const client = () => {
     if (connection) {
-        return connection.getClient() as mongodb.MongoClient
+        return Promise.resolve(connection)
     }
-    try {
+    const {
+        username,
+        password,
+        protocol,
+        hostname,
+        params,
+        port,
+        database,
+        ssl,
+        ca
+    } = config.mongodb
 
-        const {
-            username,
-            password,
-            protocol,
-            hostname,
-            params,
-            port,
-            database,
-            ssl,
-            ca
-        } = config.mongodb
+    const auth = username ? `${username}:${password}` : undefined
+    const host = port ? `${hostname}:${port}` : hostname
+    const pathname = database
+    const search = params ? `?${params}` : ''
 
-        const auth = username ? `${username}:${password}` : undefined
-        const host = port ? `${hostname}:${port}` : hostname
-        const pathname = database
-        const search = params ? `?${params}` : ''
+    const mongoUrl = url.format({
+        protocol: protocol,
+        slashes: true,
+        auth,
+        host,
+        pathname,
+        search
+    })
 
-        const mongoUrl = url.format({
-            protocol: protocol,
-            slashes: true,
-            auth,
-            host,
-            pathname,
-            search
+    const mongoOptions = {
+        ssl,
+        sslValidate: ssl
+    } as mongoose.ConnectOptions
+
+    if (ssl) {
+        mongoOptions.sslCA = Buffer.from(ca!, 'base64').toString('ascii')
+    }
+
+    mongoose.set('strictQuery', true)
+    console.log('Mongo Connect URL: ', mongoUrl)
+
+    console.log('Mongo Connect: Connecting to MongoDB...')
+    return mongoose.connect('mongodb://localhost:27017/boilerplate')
+        .then(() => {
+            connection = mongoose.connections[0]
+            connection.on('error', console.error.bind(console, 'connection error:'));
+            connection.once('open', function () {
+                console.log("Connected to DB" + "\n");
+
+            });
+            console.log('Mongo Connect: DB Successfully Connected...')
+            return connection.getClient() as mongodb.MongoClient
+
+        }).catch((error: any) => {
+            console.log('Mongo Connection Error: ', error.message)
+            throw error
         })
 
-        const mongoOptions = {
-            ssl,
-            sslValidate: ssl
-        } as mongoose.ConnectOptions
 
-        if (ssl) {
-            mongoOptions.sslCA = Buffer.from(ca!, 'base64').toString('ascii')
-        }
-
-        mongoose.set('strictQuery', true)
-        console.log('Mongo Connect URL: ', mongoUrl)
-
-        console.log('Mongo Connect: Connecting to MongoDB...')
-        await mongoose.connect(mongoUrl, mongoOptions)
-        connection = mongoose.connections[0]
-        console.log('Mongo Connect: DB Successfully Connected...')
-        connection.on('error', console.error.bind(console, 'connection error:'));
-        return connection.getClient() as mongodb.MongoClient
-
-    } catch (err) {
-        console.log(`Error connecting to MongoDB:\n${err}`)
-        throw err
-    }
 }
 

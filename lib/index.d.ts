@@ -1,7 +1,7 @@
 /// <reference types="qs" />
 /// <reference types="express" />
 declare const _default: {
-    client: () => Promise<import("mongodb").MongoClient>;
+    client: () => Promise<any>;
     session: import("express").RequestHandler<import("express-serve-static-core").ParamsDictionary, any, any, import("qs").ParsedQs, Record<string, any>>;
 };
 export = _default;
