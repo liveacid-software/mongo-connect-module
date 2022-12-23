@@ -3,8 +3,8 @@
   "description": "LiveACID MongoDB Connection Module",
   "version": "1.0.4",
   "private": true,
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
     "test": "mocha",
     "build": "tsc"

@@ -9,7 +9,6 @@ let connection: mongoose.Connection
 
 export const client = async () => {
     if (connection) {
-        console.log('connection reused: ')
         return connection.getClient() as mongodb.MongoClient
     }
     try {
