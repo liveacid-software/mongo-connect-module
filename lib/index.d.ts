@@ -1,2 +1,7 @@
-export { session } from './session';
-export { client } from './mongodb';
+/// <reference types="qs" />
+/// <reference types="express" />
+declare const _default: {
+    client: () => Promise<import("mongodb").MongoClient>;
+    session: import("express").RequestHandler<import("express-serve-static-core").ParamsDictionary, any, any, import("qs").ParsedQs, Record<string, any>>;
+};
+export default _default;

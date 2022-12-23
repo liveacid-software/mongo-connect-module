@@ -1,6 +1,7 @@
 import { expect } from 'chai'
-import { client, session } from '../src'
+import mongoModule from '../src'
 import mongodb from 'mongodb'
+import * as mongoDb from '../src/mongodb';
 const mongoose = require('mongoose');
 const { ObjectId } = mongoose.Schema.Types;
 
@@ -43,7 +44,7 @@ const UserSchema = mongoose.Schema(
 
 describe('mongoDb', () => {
     it('connections to db succesfully', () => {
-        return client()
+        return mongoDb.client()
             .then((results: mongodb.MongoClient) => {
                 expect(results).to.be.a('object')
                 const User = mongoose.model('User', UserSchema);
@@ -61,7 +62,7 @@ describe('mongoDb', () => {
 
 describe('session', () => {
     it('returns session function', () => {
-        expect(session).to.be.a('function')
+        expect(mongoModule.session).to.be.a('function')
     })
 
 })
