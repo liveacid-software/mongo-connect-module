@@ -1,7 +1,7 @@
 import * as mongodb from './mongodb'
 import session from './session'
 
-export default {
+export = {
     client: mongodb.client,
     session: session.session()
 };
