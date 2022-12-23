@@ -1,2 +1,2 @@
 export * as mongodb from './mongodb'
-export { session } from './session'
+export * as session from './session'
