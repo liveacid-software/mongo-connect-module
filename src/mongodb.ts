@@ -40,8 +40,6 @@ export const client = async () => {
         })
 
         const mongoOptions = {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
             ssl,
             sslValidate: ssl
         } as mongoose.ConnectOptions
