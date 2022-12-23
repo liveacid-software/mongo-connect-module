@@ -60,9 +60,8 @@ describe('mongoDb', () => {
 
 
 describe('session', () => {
-    it('returns session object', () => {
-        const s = session
-        console.log('s', s.session())
+    it('returns session function', () => {
+        expect(session).to.be.a('function')
     })
 
 })
