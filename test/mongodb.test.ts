@@ -62,7 +62,7 @@ describe('mongoDb', () => {
 describe('session', () => {
     it('returns session object', () => {
         const s = session
-        console.log('s', s())
+        console.log('s', s.session())
     })
 
 })

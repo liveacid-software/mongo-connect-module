@@ -40,6 +40,8 @@ export const client = async () => {
         })
 
         const mongoOptions = {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
             ssl,
             sslValidate: ssl
         } as mongoose.ConnectOptions
@@ -53,9 +55,8 @@ export const client = async () => {
 
         console.log('Mongo Connect: Connecting to MongoDB...')
         await mongoose.connect(mongoUrl, mongoOptions)
-
-        console.log('Mongo Connect: DB Successfully Connected...')
         connection = mongoose.connections[0]
+        console.log('Mongo Connect: DB Successfully Connected...')
         connection.on('error', console.error.bind(console, 'connection error:'));
         return connection.getClient() as mongodb.MongoClient
 
