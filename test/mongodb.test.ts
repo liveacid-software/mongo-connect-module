@@ -1,6 +1,5 @@
 import { expect } from 'chai'
-import { mongodb as mongoDb } from '../src'
-import { session } from '../src'
+import { mongodb as mongoDb, session } from '../src'
 import mongodb from 'mongodb'
 const mongoose = require('mongoose');
 const { ObjectId } = mongoose.Schema.Types;
