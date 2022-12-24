@@ -17,7 +17,7 @@ export default {
                 maxAge: config.session.maxAge,
                 sameSite: 'lax',
                 httpOnly: true,
-                secure: config.NODE_ENV === 'development',
+                secure: config.NODE_ENV === 'production',
             },
         });
     }

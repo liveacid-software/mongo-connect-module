@@ -54,10 +54,6 @@ export const client = () => {
         .then(() => {
             connection = mongoose.connections[0]
             connection.on('error', console.error.bind(console, 'connection error:'));
-            connection.once('open', function () {
-                console.log("Connected to DB" + "\n");
-
-            });
             console.log('Mongo Connect: DB Successfully Connected...')
             return connection.getClient() as mongodb.MongoClient
 
