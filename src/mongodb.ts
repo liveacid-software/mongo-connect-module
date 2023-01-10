@@ -46,8 +46,7 @@ export const client = () => {
     } as mongoose.ConnectOptions
 
     if (ssl) {
-        const fileData = `-----BEGIN CERTIFICATE-----\n${Buffer.from(ca!, 'base64').toString('ascii')}\n-----END CERTIFICATE-----\n`
-        fs.writeFileSync('rootCA.pem', fileData)
+        fs.writeFileSync('rootCA.pem', Buffer.from(ca!, 'base64').toString('ascii'))
         mongoOptions.sslCA = `./rootCA.pem`
     }
 
