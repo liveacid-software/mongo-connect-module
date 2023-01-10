@@ -5,6 +5,9 @@ import * as mongoose from 'mongoose'
 import * as url from 'url'
 import config from './config'
 import * as mongodb from 'mongodb'
+import * as fs from 'fs'
+
+
 let connection: any
 
 export const client = () => {
@@ -43,7 +46,8 @@ export const client = () => {
     } as mongoose.ConnectOptions
 
     if (ssl) {
-        mongoOptions.sslCA = Buffer.from(ca!, 'base64').toString('ascii')
+        fs.writeFileSync('rootCA.pem', Buffer.from(ca!, 'base64').toString('ascii'))
+        mongoOptions.sslCA = `./rootCA.pem`
     }
 
     mongoose.set('strictQuery', false)
