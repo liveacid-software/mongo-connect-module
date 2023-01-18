@@ -7,7 +7,7 @@
     "test": "node index.js"
   },
   "engines": {
-    "node": "16.13.2"
+    "node": ">=16.13.2"
   },
   "dependencies": {
     "connect-mongo": "^4.6.0",
